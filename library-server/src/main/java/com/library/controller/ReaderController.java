@@ -7,6 +7,7 @@ import com.library.entity.Reader;
 import com.library.entity.ReaderCard;
 import com.library.service.ReaderService;
 import com.library.vo.ReaderVO;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,12 +35,12 @@ public class ReaderController {
     }
 
     @PostMapping
-    public Result<Reader> create(@RequestBody Reader reader) {
+    public Result<Reader> create(@Valid @RequestBody Reader reader) {
         return Result.success(readerService.create(reader));
     }
 
     @PutMapping("/{id}")
-    public Result<Reader> update(@PathVariable Long id, @RequestBody Reader reader) {
+    public Result<Reader> update(@PathVariable Long id, @Valid @RequestBody Reader reader) {
         reader.setId(id);
         return Result.success(readerService.update(reader));
     }

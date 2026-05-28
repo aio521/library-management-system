@@ -6,6 +6,7 @@ import com.library.dto.PageDTO;
 import com.library.entity.*;
 import com.library.service.SystemService;
 import com.library.vo.UserVO;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class SystemController {
     }
 
     @PostMapping("/users")
-    public Result<User> createUser(@RequestBody Map<String, Object> body) {
+    public Result<User> createUser(@Valid @RequestBody Map<String, Object> body) {
         User user = new User();
         user.setUsername((String) body.get("username"));
         user.setPassword((String) body.get("password"));
@@ -42,7 +43,7 @@ public class SystemController {
     }
 
     @PutMapping("/users/{id}")
-    public Result<User> updateUser(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public Result<User> updateUser(@PathVariable Long id, @Valid @RequestBody Map<String, Object> body) {
         User user = new User();
         user.setId(id);
         user.setUsername((String) body.get("username"));
@@ -68,12 +69,12 @@ public class SystemController {
     }
 
     @PostMapping("/roles")
-    public Result<Role> createRole(@RequestBody Role role) {
+    public Result<Role> createRole(@Valid @RequestBody Role role) {
         return Result.success(systemService.createRole(role));
     }
 
     @PutMapping("/roles/{id}")
-    public Result<Role> updateRole(@PathVariable Long id, @RequestBody Role role) {
+    public Result<Role> updateRole(@PathVariable Long id, @Valid @RequestBody Role role) {
         role.setId(id);
         return Result.success(systemService.updateRole(role));
     }

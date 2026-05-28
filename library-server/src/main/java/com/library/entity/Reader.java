@@ -1,6 +1,7 @@
 package com.library.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -10,6 +11,7 @@ public class Reader {
     @TableId(type = IdType.AUTO)
     private Long id;
     private String readerNo;
+    @NotBlank(message = "姓名不能为空")
     private String name;
     private Integer gender;
     private String idCard;

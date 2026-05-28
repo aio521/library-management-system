@@ -3,6 +3,7 @@ package com.library.controller;
 import com.library.common.Result;
 import com.library.entity.Category;
 import com.library.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +26,13 @@ public class CategoryController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
-    public Result<Category> create(@RequestBody Category category) {
+    public Result<Category> create(@Valid @RequestBody Category category) {
         return Result.success(categoryService.create(category));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
-    public Result<Category> update(@PathVariable Long id, @RequestBody Category category) {
+    public Result<Category> update(@PathVariable Long id, @Valid @RequestBody Category category) {
         category.setId(id);
         return Result.success(categoryService.update(category));
     }

@@ -7,6 +7,7 @@ import com.library.entity.Book;
 import com.library.entity.BookStock;
 import com.library.service.BookService;
 import com.library.vo.BookVO;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,13 +35,13 @@ public class BookController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
-    public Result<Book> create(@RequestBody Book book) {
+    public Result<Book> create(@Valid @RequestBody Book book) {
         return Result.success(bookService.create(book));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
-    public Result<Book> update(@PathVariable Long id, @RequestBody Book book) {
+    public Result<Book> update(@PathVariable Long id, @Valid @RequestBody Book book) {
         book.setId(id);
         return Result.success(bookService.update(book));
     }

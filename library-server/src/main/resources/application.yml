@@ -22,5 +22,5 @@ knife4j:
   enable: true
 
 jwt:
-  secret: library-management-system-jwt-secret-key-2026-xinjiang-cai-da
+  secret: ${JWT_SECRET:library-management-system-jwt-secret-key-2026-xinjiang-cai-da}
   expiration: 86400000

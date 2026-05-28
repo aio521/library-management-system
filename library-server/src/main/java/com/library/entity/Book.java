@@ -1,6 +1,7 @@
 package com.library.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +11,9 @@ import java.time.LocalDateTime;
 public class Book {
     @TableId(type = IdType.AUTO)
     private Long id;
+    @NotBlank(message = "ISBN不能为空")
     private String isbn;
+    @NotBlank(message = "书名不能为空")
     private String title;
     private String author;
     private String publisher;
