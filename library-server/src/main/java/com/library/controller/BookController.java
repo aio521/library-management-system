@@ -33,20 +33,20 @@ public class BookController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Book> create(@RequestBody Book book) {
         return Result.success(bookService.create(book));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Book> update(@PathVariable Long id, @RequestBody Book book) {
         book.setId(id);
         return Result.success(bookService.update(book));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Void> delete(@PathVariable Long id) {
         bookService.delete(id);
         return Result.success();
@@ -58,13 +58,13 @@ public class BookController {
     }
 
     @PostMapping("/{id}/stocks")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<BookStock> addStock(@PathVariable Long id) {
         return Result.success(bookService.addStock(id));
     }
 
     @PutMapping("/stocks/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Void> updateStock(@PathVariable Long id, @RequestBody BookStock stock) {
         stock.setId(id);
         bookService.updateStock(stock);
@@ -72,7 +72,7 @@ public class BookController {
     }
 
     @DeleteMapping("/stocks/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Void> deleteStock(@PathVariable Long id) {
         bookService.deleteStock(id);
         return Result.success();

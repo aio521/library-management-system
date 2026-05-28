@@ -20,11 +20,20 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        String placeholder = "TO_BE_REPLACED_BY_INIT_RUNNER";
+
         User admin = userMapper.selectOne(
                 new LambdaQueryWrapper<User>().eq(User::getUsername, "admin"));
-        if (admin != null && "TO_BE_REPLACED_BY_INIT_RUNNER".equals(admin.getPassword())) {
+        if (admin != null && placeholder.equals(admin.getPassword())) {
             admin.setPassword(passwordEncoder.encode("admin123"));
             userMapper.updateById(admin);
+        }
+
+        User librarian = userMapper.selectOne(
+                new LambdaQueryWrapper<User>().eq(User::getUsername, "librarian"));
+        if (librarian != null && placeholder.equals(librarian.getPassword())) {
+            librarian.setPassword(passwordEncoder.encode("admin123"));
+            userMapper.updateById(librarian);
         }
     }
 }

@@ -33,9 +33,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = resolveToken(request);
 
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
-            if (redisUtil.hasKey("blacklist:" + token)) {
-                filterChain.doFilter(request, response);
-                return;
+            try {
+                if (redisUtil.hasKey("blacklist:" + token)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+            } catch (Exception e) {
+                // Redis不可用时跳过黑名单检查，允许请求继续
             }
 
             Long userId = jwtTokenProvider.getUserId(token);

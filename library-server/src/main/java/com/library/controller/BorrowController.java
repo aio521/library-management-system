@@ -27,7 +27,7 @@ public class BorrowController {
     }
 
     @PostMapping("/borrows")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<BorrowRecord> borrow(@Valid @RequestBody BorrowRequestDTO dto) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Long operatorId = (Long) auth.getPrincipal();
@@ -35,7 +35,7 @@ public class BorrowController {
     }
 
     @PostMapping("/borrows/{id}/return")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Void> returnBook(@PathVariable Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Long operatorId = (Long) auth.getPrincipal();
@@ -44,7 +44,7 @@ public class BorrowController {
     }
 
     @PostMapping("/borrows/{id}/renew")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN', 'ROLE_READER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN', 'ROLE_READER')")
     public Result<Void> renew(@PathVariable Long id) {
         borrowService.renew(id);
         return Result.success();
@@ -60,19 +60,19 @@ public class BorrowController {
     }
 
     @GetMapping("/borrows/overdue")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN')")
     public Result<Page<BorrowRecordVO>> overdue(PageDTO pageDTO) {
         return Result.success(borrowService.overduePage(pageDTO));
     }
 
     @PostMapping("/reserves")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN', 'ROLE_READER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN', 'ROLE_READER')")
     public Result<Reserve> reserve(@RequestBody Map<String, Long> body) {
         return Result.success(borrowService.reserve(body.get("readerId"), body.get("bookId")));
     }
 
     @DeleteMapping("/reserves/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_LIBRARIAN', 'ROLE_ADMIN', 'ROLE_READER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_LIBRARIAN', 'ROLE_ADMIN', 'ROLE_READER')")
     public Result<Void> cancelReserve(@PathVariable Long id) {
         borrowService.cancelReserve(id);
         return Result.success();
