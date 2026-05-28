@@ -15,7 +15,8 @@
       "Bash(find /d -maxdepth 3 -name \"javac\" -type f)",
       "Read(//usr/lib/**)",
       "Read(//c/Program Files/**)",
-      "Bash(JAVA_HOME=/e/Develop/Path/Java/jdk17 mvn clean compile -q)"
+      "Bash(JAVA_HOME=/e/Develop/Path/Java/jdk17 mvn clean compile -q)",
+      "Bash(where java *)"
     ]
   }
 }
