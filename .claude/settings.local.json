@@ -22,7 +22,9 @@
       "Bash(JAVA_HOME=/e/Develop/Path/Java/jdk17 mvn clean compile -DskipTests)",
       "Bash(JAVA_HOME=\"D:/ClaudeCode/图书管理系统前后端分离SpringBoot + vue3/jdk-17\" mvn clean compile -q)",
       "Bash(/e/Develop/Tools/Java/jdk-17*/bin/java -version)",
-      "Read(//e//**)"
+      "Read(//e//**)",
+      "Read(//usr/**)",
+      "Bash(find /e -name \"javac\" -type f)"
     ]
   }
 }
