@@ -65,15 +65,15 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public List<Map<String, Object>> borrowTrend(String period) {
-        String format;
-        switch (period) {
-            case "week" -> format = "%Y-%u";
-            case "month" -> format = "%Y-%m";
-            default -> format = "%Y-%m-%d";
-        }
+        // 白名单校验，杜绝注入风险（DATE_FORMAT 格式参数无法用占位符）
+        String format = switch (period) {
+            case "week" -> "%Y-%u";
+            case "month" -> "%Y-%m";
+            default -> "%Y-%m-%d";
+        };
 
         return jdbcTemplate.queryForList(
-                "SELECT DATE_FORMAT(borrow_date, '" + format + "') AS period, COUNT(*) AS count " +
-                "FROM borrow_record GROUP BY period ORDER BY period");
+                "SELECT DATE_FORMAT(borrow_date, ?) AS period, COUNT(*) AS count " +
+                "FROM borrow_record GROUP BY period ORDER BY period", format);
     }
 }
