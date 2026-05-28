@@ -31,3 +31,6 @@ dist/
 
 # Claude Code
 .claude/
+
+# Dev docs
+docs/
