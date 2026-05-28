@@ -24,7 +24,11 @@
       "Bash(/e/Develop/Tools/Java/jdk-17*/bin/java -version)",
       "Read(//e//**)",
       "Read(//usr/**)",
-      "Bash(find /e -name \"javac\" -type f)"
+      "Bash(find /e -name \"javac\" -type f)",
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)"
     ]
   }
 }
