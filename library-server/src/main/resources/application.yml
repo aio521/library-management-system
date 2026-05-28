@@ -10,7 +10,7 @@ mybatis-plus:
   type-aliases-package: com.library.entity
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # log-impl moved to dev profile
   global-config:
     db-config:
       id-type: auto
