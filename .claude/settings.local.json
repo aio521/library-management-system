@@ -16,7 +16,10 @@
       "Read(//usr/lib/**)",
       "Read(//c/Program Files/**)",
       "Bash(JAVA_HOME=/e/Develop/Path/Java/jdk17 mvn clean compile -q)",
-      "Bash(where java *)"
+      "Bash(where java *)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(find /e -maxdepth 4 -name \"javac\" -type f)",
+      "Bash(JAVA_HOME=/e/Develop/Path/Java/jdk17 mvn clean compile -DskipTests)"
     ]
   }
 }
