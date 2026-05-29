@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Reader {
     @TableId(type = IdType.AUTO)
     private Long id;
+    private Long userId;
     private String readerNo;
     @NotBlank(message = "姓名不能为空")
     private String name;
