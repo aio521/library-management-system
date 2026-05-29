@@ -2,6 +2,8 @@ package com.library.controller;
 
 import com.library.common.Result;
 import com.library.dto.LoginDTO;
+import com.library.dto.RegisterDTO;
+import com.library.dto.SendCodeDTO;
 import com.library.service.AuthService;
 import com.library.vo.LoginVO;
 import jakarta.validation.Valid;
@@ -38,5 +40,17 @@ public class AuthController {
         Long userId = (Long) auth.getPrincipal();
         LoginVO vo = authService.getUserInfo(userId);
         return Result.success(vo);
+    }
+
+    @PostMapping("/send-code")
+    public Result<Void> sendCode(@Valid @RequestBody SendCodeDTO dto) {
+        authService.sendCode(dto.getPhone());
+        return Result.success();
+    }
+
+    @PostMapping("/register")
+    public Result<Void> register(@Valid @RequestBody RegisterDTO dto) {
+        authService.register(dto);
+        return Result.success();
     }
 }

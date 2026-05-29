@@ -24,3 +24,6 @@ knife4j:
 jwt:
   secret: ${JWT_SECRET:library-management-system-jwt-secret-key-2026-xinjiang-cai-da}
   expiration: 86400000
+
+sms:
+  provider: mock
