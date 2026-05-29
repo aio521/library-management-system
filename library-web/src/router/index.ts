@@ -3,6 +3,12 @@ import type { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
+    path: '/register',
+    name: 'Register',
+    component: () => import('@/views/register/index.vue'),
+    meta: { title: '注册' }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
@@ -144,9 +150,11 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const token = localStorage.getItem('token')
-  if (to.path !== '/login' && !token) {
+  if (to.path !== '/login' && to.path !== '/register' && !token) {
     next('/login')
   } else if (to.path === '/login' && token) {
+    next('/dashboard')
+  } else if (to.path === '/register' && token) {
     next('/dashboard')
   } else {
     next()
