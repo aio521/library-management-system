@@ -51,6 +51,7 @@ CREATE TABLE book_stock (
 
 CREATE TABLE reader (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT COMMENT '关联user表ID（自助注册时创建）',
     reader_no VARCHAR(20) NOT NULL UNIQUE,
     name VARCHAR(50) NOT NULL,
     gender TINYINT DEFAULT 1 COMMENT '0=女 1=男',
@@ -143,3 +144,14 @@ CREATE TABLE operation_log (
     ip VARCHAR(50),
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB COMMENT='操作日志表';
+
+-- 短信验证码表
+DROP TABLE IF EXISTS sms_code;
+CREATE TABLE sms_code (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    phone VARCHAR(20) NOT NULL,
+    code VARCHAR(6) NOT NULL,
+    expire_time DATETIME NOT NULL,
+    used TINYINT DEFAULT 0 COMMENT '0=未使用 1=已使用',
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB COMMENT='短信验证码表';
